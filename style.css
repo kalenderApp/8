@@ -1,0 +1,116 @@
+body {
+    width:180px;
+    height:75px;
+    margin:150px auto 0 auto;
+}
+#content2 {
+    margin-left:120px;
+}
+.squared {
+    position:relative;
+}
+.square {
+    width:15px;
+    height:15px;
+    position:absolute;
+    background:blue;
+}
+.a {
+    top:0px;
+    left:0px;
+}
+.b {
+    top:0px;
+    left:15px;
+}
+.c {
+    top:0px;
+    left:30px;
+}
+.d {
+    top:0px;
+    left:45px;
+}
+
+
+
+.e {
+    top:15px;
+    left:0px;
+}
+.f {
+    top:15px;
+    left:15px;
+    display:/none;
+}
+.g {
+    top:15px;
+    left:30px;
+    display:/none;
+}
+.h {
+    top:15px;
+    left:45px;
+}
+
+
+
+
+.i {
+    top:30px;
+    left:0px;
+}
+.j {
+    top:30px;
+    left:15px;
+}
+.k {
+    top:30px;
+    left:30px;
+}
+.l {
+    top:30px;
+    left:45px;
+}
+
+
+
+
+.m {
+    top:45px;
+    left:0px;
+}
+.n {
+    top:45px;
+    left:15px;
+    display:/none;
+}
+.o {
+    top:45px;
+    left:30px;
+    display:/none;
+}
+.p {
+    top:45px;
+    left:45px;
+}
+
+
+
+
+.q {
+    top:60px;
+    left:0px;
+}
+.r {
+    top:60px;
+    left:15px;
+}
+.s {
+    top:60px;
+    left:30px;
+}
+.t {
+    top:60px;
+    left:45px;
+}
