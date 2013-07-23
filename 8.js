@@ -2,35 +2,80 @@
  * Using a square to create a number
  *
  * Author: 一米
- * Date: 2013-6-19
+ * Date: 2013-7-23
  * Time: 9:33
- * Version: 0.1
+ * Version: 0.2
  *
  * Using :
  *
- * var instance = new Square(id, number);
- * instace.sqare();
+ * var instance = new Square(id, width, height);
+ * instace.sqare(9);
  *
  * or
  *
- * new Square(id, number).sqare();
+ * new Square(id, width, height).sqare(9);
  *
  */
 ;
-function Square(element, number){
-    var div = document.createElement("div");
-        div.className = "squared";
 
-    var html =
-        '<div class="square a"></div><div class="square b"></div><div class="square c"></div><div class="square d"></div>' +
-        '<div class="square e"></div><div class="square f"></div><div class="square g"></div><div class="square h"></div>' +
-        '<div class="square i"></div><div class="square j"></div><div class="square k"></div><div class="square l"></div>' +
-        '<div class="square m"></div><div class="square n"></div><div class="square o"></div><div class="square p"></div>' +
-        '<div class="square q"></div><div class="square r"></div><div class="square s"></div><div class="square t"></div>';
+function Square(element, width, height){
+    var div  = document.createElement("div"),
+        html = "",
+        i    = 0,
+        top,
+        left;
+
+    div.className = "squared";
+
+    for(; i < 20; i++) {
+        pTop(i);
+        pLeft(i)
+        html += '<div class="square sq' + i + '" style="width:' + width + 'px;height:' + height + 'px;top:' + top + 'px;left:' + left + 'px;"></div>';
+    }
+
+    function pTop(j){
+        if(j < 4){
+            top = 0;
+            return
+        }
+        if(j < 8){
+            top = height;
+            return
+        }
+        if(j < 12){
+            top = height * 2;
+            return
+        }
+        if(j < 16){
+            top = height * 3;
+            return
+        }
+        if(j <= 19){
+            top = height * 4;
+            return
+        }
+    }
+    function pLeft(j){
+        if(j % 4 === 0){
+            left = 0;
+            return
+        }
+        if((j+3) % 4 === 0){
+            left = width;
+            return
+        }
+        if(j % 2 === 0){
+            left = width * 2;
+            return
+        }
+        if((j-1) % 2 === 0){
+            left = width * 3;
+            return
+        }
+    }
+
 
     div.innerHTML = html;
-
-    this.number   = number;
     this.element  = element;
     this.display  = [];
 
@@ -39,133 +84,71 @@ function Square(element, number){
 
 };
 
+
+
 Square.prototype.numberMap = [
-    ["f","g","j","k","k","n","o"], /* 0 */
-    ["a","b","c","e","f","g","i","j","k","m","n","o","q","r","s"], /* 1 */
-    ["e","f","g","n","o","p"], /* 2 */
-    ["e","f","g","m","n","o"], /* 3 */
-    ["b","c","f","g","m","n","o","q","r","s"], /* 4 */
-    ["f","g","h","m","n","o"], /* 5 */
-    ["f","g","h","n","o"], /* 6 */
-    ["e","f","g","i","j","k","m","n","o","q","r","s"], /* 7 */
-    ["f","g","n","o"], /* 8 */
-    ["f","g","m","n","o","q","r","s"] /* 9 */
+    ["5","6","9","10","13","14"], /* 0 */
+    ["0","1","2","4","5","6","8","9","10","12","13","14","16","17","18"], /* 1 */
+    ["4","5","6","13","14","15"], /* 2 */
+    ["4","5","6","12","13","14"], /* 3 */
+    ["1","2","5","6","12","13","14","16","17","18"], /* 4 */
+    ["5","6","7","12","13","14"], /* 5 */
+    ["5","6","7","13","14"], /* 6 */
+    ["4","5","6","8","9","10","12","13","14","16","17","18"], /* 7 */
+    ["5","6","13","14"], /* 8 */
+    ["5","6","12","13","14","16","17","18"] /* 9 */
 ];
 
-Square.prototype.sqare = function(){
+Square.prototype.sqare = function(number){
     var that = this,
-        t;
+        itemDisplayNone  = that.numberMap[number],
+        itemDisplayBlock = that.display,
+        len              = itemDisplayNone.length,
+        leng             = itemDisplayBlock.length,
+        i,
+        j,
+        k,
+        l,
+        nodeDisplayBlock,
+        nodeDisplayNone,
+        elementDisplayBlock,
+        elementDisplayNone,
+        lenBlock,
+        lenNone;
 
-    function timeMinus(){
 
-        var itemDisplayNone  = that.numberMap[that.number],
-            itemDisplayBlock = that.display,
-            len              = itemDisplayNone.length,
-            leng             = itemDisplayBlock.length,
-            i,
-            j,
-            k,
-            l,
-            nodeDisplayBlock,
-            nodeDisplayNone,
-            elementDisplayBlock,
-            elementDisplayNone,
-            lenBlock,
-            lenNone;
+    // 待优化
+    for(i = 0; i < leng; i++) {
 
-        that.number --;
+        nodeDisplayBlock    = itemDisplayBlock[i];
+        elementDisplayBlock = document.getElementById(that.element).getElementsByClassName(nodeDisplayBlock);
+        lenBlock            = elementDisplayBlock.length;
 
-        // 待优化
-        for(i = 0; i < leng; i++) {
-
-            nodeDisplayBlock    = itemDisplayBlock[i];
-            elementDisplayBlock = document.getElementById(that.element).getElementsByClassName(nodeDisplayBlock);
-            lenBlock            = elementDisplayBlock.length;
-
-            for(j = 0; j < lenBlock; j++) {
-                elementDisplayBlock[j].style.display = "block";
-            }
-
+        for(j = 0; j < lenBlock; j++) {
+            elementDisplayBlock[j].style.display = "block";
         }
-
-
-        that.display = [];
-
-
-
-        for(k = 0; k < len; k++) {
-
-            that.display.push(itemDisplayNone[k]);
-
-            nodeDisplayNone    = itemDisplayNone[k];
-            elementDisplayNone = document.getElementById(that.element).getElementsByClassName(nodeDisplayNone);
-            lenNone            = elementDisplayNone.length;
-
-            for(l = 0; l < lenNone; l++) {
-                elementDisplayNone[l].style.display = "none";
-            }
-
-        }
-
-
-        if(that.number < 0) {
-            clearTimeout(t);
-            return
-         }
-
-        t = setTimeout(timeMinus, 1000);
 
     }
 
-    timeMinus();
+
+    that.display = [];
+
+
+
+    for(k = 0; k < len; k++) {
+
+        that.display.push("sq"+itemDisplayNone[k]);
+
+        nodeDisplayNone    = itemDisplayNone[k];
+
+        elementDisplayNone = document.getElementById(that.element).getElementsByClassName("sq"+nodeDisplayNone);
+        lenNone            = elementDisplayNone.length;
+
+        for(l = 0; l < lenNone; l++) {
+            elementDisplayNone[l].style.display = "none";
+        }
+
+    }
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

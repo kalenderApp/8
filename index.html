@@ -6,14 +6,27 @@
     <link type="text/css" rel="stylesheet" charset="utf-8" href="style.css"/>
 </head>
 <body>
-    <div id="content1"></div>
-    <div id="content2"></div>
+    <div id="content"></div>
 </body>
 <script type="text/javascript" src="8.js"></script>
 <script type="text/javascript">
-    var instance1 = new Square("content1",9),
-        instance2 = new Square("content2",9);
-    instance1.sqare();
-    instance2.sqare();
+    var instance = new Square("content",15,15),
+        time     = 9;
+
+    var t = setInterval(function(){
+        if( time >= 0) {
+            instance.sqare(time);
+            time--;
+           return
+        };
+        //clearInterval(t);
+    },1000);
+
+    setInterval(function(){time=9},11000)
+
+
+
+
+
 </script>
 </html>
